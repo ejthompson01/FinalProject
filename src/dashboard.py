@@ -416,7 +416,9 @@ def generate_pattern(n_clicks, name,
                             length, stitch, height, row)
         filename = pattern.generate_pdf()
         href = f"/downloads/{filename}"
-        return href, {'display': 'inline'}
+        return href, {'display': 'inline',
+                      'fontFamily': 'American Typewriter'}
     except Exception as e:
         print(f"Error: {e}")
-        return '', {'display': 'none'}
+        return '', {'display': 'none',
+                    'fontFamily': 'American Typewriter'}

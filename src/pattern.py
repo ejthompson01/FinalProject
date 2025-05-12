@@ -159,7 +159,7 @@ class SweaterPattern:
 
         Path("downloads").mkdir(exist_ok=True)
         safe_name = re.sub(r'[^\w\s-]', '', self.name).strip().replace(' ', '_')
-        filename = f"{safe_name}_sweater_pattern.pdf"
+        filename = f"downloads/{safe_name}_sweater_pattern.pdf"
 
         pdf = FPDF()
         pdf.add_page()
