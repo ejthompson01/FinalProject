@@ -343,7 +343,7 @@ def update_embellish_input(embellish: str):
     Input('embellish-dd', 'value')
 )
 def update_collar(neck: str, embellish: str):
-    if (neck == 'Turtleneck' or 'Mock neck') or (embellish == 'No embellishment'):
+    if (neck == 'Boat neck' or 'Crew neck') or (embellish == 'No embellishment'):
         style = {'display': 'none',
                  'fontFamily': 'American Typewriter'
                  }
