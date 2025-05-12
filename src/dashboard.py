@@ -1,7 +1,7 @@
 from dash import Dash, dcc, html, Input, Output, callback
 import pandas as pd
 from PIL import Image
-from pattern import SweaterPattern
+from src.pattern import SweaterPattern
 from flask import send_from_directory
 
 df = pd.read_csv('data/knit_data.csv')
@@ -10,7 +10,7 @@ def run_app() -> None:
     app = Dash(__name__)
     app.title = 'Sweater Dashboard'
 
-    @app.server.route("/download/<filename>")
+    @app.server.route("/downloads/<filename>")
     def serve_pdf(filename):
         return send_from_directory("downloads", filename, as_attachment=True)
     
@@ -266,7 +266,7 @@ def create_layout(app: Dash) -> None:
                     style={'display': 'none',
                            'marginTop': '20px',
                            'fontSize': '12px',
-                           'fontFamily': 'American Typewriter'})
+                           'fontFamily': 'Courier'})
 
     
     children1 += [image, gauge_heading, gauge_label, length, stitch, height, row, button, link]
@@ -415,7 +415,7 @@ def generate_pattern(n_clicks, name,
                             body_height, bottom_width, neck_opening_width,
                             length, stitch, height, row)
         filename = pattern.generate_pdf()
-        href = f"/download/{filename}"
+        href = f"/downloads/{filename}"
         return href, {'display': 'inline'}
     except Exception as e:
         print(f"Error: {e}")

@@ -96,15 +96,15 @@ class SweaterPattern:
 
             # Sweater Body
             ('h2', f'Knit the Body'),
-            ('text', f'1. Cast on {self.bottom_width*self.stitch_gauge*2} stitches to 32 inch circular needles, connecting them in the round. {cuff}'),
-            ('text', f'2. Knit stockinette until your work measures {round(self.body_height-self.sleeve_opening_width)} inches.'),
-            ('text', f'3. Split for sleeves by putting {self.bottom_width*self.stitch_gauge} stitches onto a separate set of needles or scrap string.')
+            ('text', f'1. Cast on {self.bottom_width*self.stitch_gauge*2} stitches to 32 inch circular needles. Place a stitch marker on your right needle and conenct your stitches in the round. {cuff}'),
+            ('text', f'2. Knit stockinette until your work measures {round(self.body_height-self.sleeve_opening_width)} inches and you have reached your stitch marker.'),
+            ('text', f'3. Split for sleeves by putting {self.bottom_width*self.stitch_gauge} stitches onto a separate set of needles or scrap string and remove the stitch marker.')
         ]
         if self.neck == 'Boat neck':
             self.pattern += [
-                ('text', f'4. Knit the front half by continuing to knit stockinette until your work measures {self.sleeve_opening_width} inches from the underarm to the top. {collar}'),
+                ('text', f'4. Knit the front half by to knitting stockinette flat until your work measures {self.sleeve_opening_width} inches from the underarm to the top. {collar}'),
                 ('text', f'5. If you used scrap string, put the back half stitches onto your needles. If you used a separate set of needles for the back half, switch to those.'),
-                ('text', f'6. Knit stockinette until the front and back heights are equal. {collar}')
+                ('text', f'6. Knit stockinette on the back half until the front and back heights are equal. Use stitch markers to count rows if you wish to be precise in their heights. {collar}')
                 ]
         else:
             self.pattern += [
@@ -134,14 +134,14 @@ class SweaterPattern:
                 ]
         if self.sleeve == 'Tapered':
             self.pattern += [
-                ('text', f'2. Knit {self.decrease-1} rounds of stockinette. Knit another round and K2Tog the last two stitches before the stitch marker. Knit one stitch after the stitch marker then K2Tog the next two stitches. {cuff}'),
+                ('text', f'2. Knit {self.decrease-1} rounds of stockinette. Knit another round and K2Tog the last two stitches before the stitch marker. Knit one stitch after the stitch marker then K2Tog the next two stitches. Use stitch markers to mark your decrease rounds if you wish to do so. {cuff}'),
                 ('text', f'3. Repeat Step 2 {self.num_decreases} times.'),
                 ('text', f'4. Cast off.'),
                 ('text', f'5. Repeat steps 1-3 for the right sleeve.'),
                 ]
         if self.sleeve == 'Flare':
             self.pattern += [
-                ('text', f'2. Knit {self.increase-1} rounds of stockinette. Knit another round and M1R before the stitch marker. Knit one stitch after the stitch marker then M1L. {cuff}'),
+                ('text', f'2. Knit {self.increase-1} rounds of stockinette. Knit another round and M1R before the stitch marker. Knit one stitch after the stitch marker then M1L. Use stitch markers to mark your increase rounds if you wish to do so. {cuff}'),
                 ('text', f'3. Repeat Step 2 {self.num_increases} times.'),
                 ('text', f'4. Cast off.'),
                 ('text', f'5. Repeat steps 1-3 for the right sleeve.'),
