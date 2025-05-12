@@ -108,14 +108,14 @@ def create_layout(app: Dash) -> None:
     
     children += [ribbing_label, ribbing_input1, ribbing_input2]
     
-    # Cuff inputs:
-    cuff_header = html.H4('Enter your desired ribbed cuff height (in inches):',
-                            id='cuff-label',
+    # Edge inputs:
+    edge_header = html.H4('Enter your desired ribbed edge height (in inches):',
+                            id='edge-label',
                             style={'fontFamily': 'American Typewriter'}
                             )
-    cuff_input = dcc.Input(id='cuff-input',
+    edge_input = dcc.Input(id='edge-input',
                             type='number',
-                            placeholder='Cuff height (in inches)',
+                            placeholder='Edge height (in inches)',
                             style={'display': 'block',
                                 'verticalAlign': 'top',
                                 'fontFamily': 'American Typewriter'}
@@ -129,7 +129,7 @@ def create_layout(app: Dash) -> None:
                             placeholder='Collar height (in inches)',
                             style={'fontFamily': 'American Typewriter'}
                             )
-    children += [cuff_header, cuff_input, collar_header, collar_input]
+    children += [edge_header, edge_input, collar_header, collar_input]
     
     # Add all embellishment inputs to the children list
     
@@ -321,20 +321,30 @@ def update_image(sleeve: str,
     Output('ribbing-label', 'style'),
     Output('rib-input1', 'style'),
     Output('rib-input2', 'style'),
-    Output('cuff-label', 'style'),
-    Output('cuff-input', 'style'),
-    Input('embellish-dd', 'value'),
+    Input('embellish-dd', 'value')
 )
-def update_embellish_input(embellish: str):
-    if embellish != 'No embellishment':
+def update_rib(embellish: str):
+    if embellish == 'No embellishment':
+        style = {'display': 'none'}
+    else:
+        style = {'display': 'block',
+                 'fontFamily': 'American Typewriter',
+                 }
+    return style, style, style
+
+@callback(
+    Output('edge-label', 'style'),
+    Output('edge-input', 'style'),
+    Input('embellish-dd', 'value')
+)
+def update_edge(embellish: str):
+    if embellish in ['Ribbed edges', 'Ribbed edges and collar']:
         style = {'display': 'block',
                  'fontFamily': 'American Typewriter'
                  }
     else:
-        style = {'display': 'none',
-                 'fontFamily': 'American Typewriter',
-                 }
-    return style, style, style, style, style
+        style = {'display': 'none'}
+    return style, style
     
 @callback(
     Output('collar-label', 'style'),
@@ -343,14 +353,12 @@ def update_embellish_input(embellish: str):
     Input('embellish-dd', 'value')
 )
 def update_collar(neck: str, embellish: str):
-    if (neck == 'Boat neck' or 'Crew neck') or (embellish == 'No embellishment'):
-        style = {'display': 'none',
+    if neck in ['Mock neck', 'Turtleneck'] or embellish in ['Ribbed collar', 'Ribbed edges and collar']:
+        style = {'display': 'block',
                  'fontFamily': 'American Typewriter'
                  }
     else:
-        style = {'display': 'block',
-                 'fontFamily': 'American Typewriter',
-                 }
+        style = {'display': 'none'}
     return style, style
 
 @callback(
@@ -369,9 +377,7 @@ def update_size_input(size: str):
                  'fontFamily': 'American Typewriter'
                  }
     else:
-        style = {'display': 'none',
-                 'fontFamily': 'American Typewriter',
-                 }
+        style = {'display': 'none'}
     return style, style, style, style, style, style, style
     
 
@@ -385,7 +391,7 @@ def update_size_input(size: str):
     Input('embellish-dd', 'value'),
     Input('rib-input1', 'value'),
     Input('rib-input2', 'value'),
-    Input('cuff-input', 'value'),
+    Input('edge-input', 'value'),
     Input('collar-input', 'value'),
     Input('size-dd', 'value'),
     Input('size-input1', 'value'),
@@ -401,7 +407,7 @@ def update_size_input(size: str):
     )
 def generate_pattern(n_clicks, name,
                     neck, sleeve, embellishment,
-                    rib1, rib2, cuff, collar, size,
+                    rib1, rib2, edge, collar, size,
                     sleeve_length, sleeve_cuff_width, shoulder_width,
                     body_height, bottom_width, neck_opening_width,
                     length, stitch, height, row):
@@ -410,7 +416,7 @@ def generate_pattern(n_clicks, name,
     
     try:
         pattern = SweaterPattern(name, neck, sleeve, embellishment,
-                            rib1, rib2, cuff, collar, size,
+                            rib1, rib2, edge, collar, size,
                             sleeve_length, sleeve_cuff_width, shoulder_width,
                             body_height, bottom_width, neck_opening_width,
                             length, stitch, height, row)

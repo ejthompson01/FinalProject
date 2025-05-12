@@ -4,7 +4,7 @@ from pathlib import Path
 
 class SweaterPattern:
     def __init__(self, name, neck, sleeve, embellishment,
-                    rib1, rib2, cuff, collar, size,
+                    rib1, rib2, edge, collar, size,
                     sleeve_length, sleeve_cuff_width, shoulder_width,
                     body_height, bottom_width, neck_opening_width,
                     length, stitch, height, row):
@@ -25,7 +25,7 @@ class SweaterPattern:
         self.name = name
         self.rib1 = rib1
         self.rib2 = rib2
-        self.cuff = cuff
+        self.edge = edge
         self.collar = collar
         self.pattern = ''
 
@@ -72,10 +72,10 @@ class SweaterPattern:
         Contructs the text of the pattern.        
         """
         # Variables for repeated sentences:
-        if self.cuff != None:
-            cuff = f"Knit a {self.rib1}x{self.rib2} rib until your rib measures {self.cuff} inches."
+        if self.edge != None:
+            edge = f"Knit a {self.rib1}x{self.rib2} rib until your rib measures {self.edge} inches."
         else:
-            cuff = ''
+            edge = ''
         if self.collar != None:
             collar = f"Knit a {self.rib1}x{self.rib2} rib until your rib measures {self.collar} inches."
         else:
@@ -96,7 +96,7 @@ class SweaterPattern:
 
             # Sweater Body
             ('h2', f'Knit the Body'),
-            ('text', f'1. Cast on {self.bottom_width*self.stitch_gauge*2} stitches to 32 inch circular needles. Place a stitch marker on your right needle and conenct your stitches in the round. {cuff}'),
+            ('text', f'1. Cast on {self.bottom_width*self.stitch_gauge*2} stitches to 32 inch circular needles. Place a stitch marker on your right needle and conenct your stitches in the round. {edge}'),
             ('text', f'2. Knit stockinette until your work measures {round(self.body_height-self.sleeve_opening_width)} inches and you have reached your stitch marker.'),
             ('text', f'3. Split for sleeves by putting {self.bottom_width*self.stitch_gauge} stitches onto a separate set of needles or scrap string and remove the stitch marker.')
         ]
@@ -128,27 +128,27 @@ class SweaterPattern:
             ]
         if self.sleeve == 'Straight':
             self.pattern += [
-                ('text', f'2. Knit stockinette until your sleeves measure {self.sleeve_length} inches. {cuff}'),
+                ('text', f'2. Knit stockinette until your sleeves measure {self.sleeve_length} inches. {edge}'),
                 ('text', f'3. Cast off.'),
                 ('text', f'4. Repeat steps 1-3 for the right sleeve.')
                 ]
         if self.sleeve == 'Tapered':
             self.pattern += [
-                ('text', f'2. Knit {self.decrease-1} rounds of stockinette. Knit another round and K2Tog the last two stitches before the stitch marker. Knit one stitch after the stitch marker then K2Tog the next two stitches. Use stitch markers to mark your decrease rounds if you wish to do so. {cuff}'),
+                ('text', f'2. Knit {self.decrease-1} rounds of stockinette. Knit another round and K2Tog the last two stitches before the stitch marker. Knit one stitch after the stitch marker then K2Tog the next two stitches. Use stitch markers to mark your decrease rounds if you wish to do so. {edge}'),
                 ('text', f'3. Repeat Step 2 {self.num_decreases} times.'),
                 ('text', f'4. Cast off.'),
                 ('text', f'5. Repeat steps 1-3 for the right sleeve.'),
                 ]
         if self.sleeve == 'Flare':
             self.pattern += [
-                ('text', f'2. Knit {self.increase-1} rounds of stockinette. Knit another round and M1R before the stitch marker. Knit one stitch after the stitch marker then M1L. Use stitch markers to mark your increase rounds if you wish to do so. {cuff}'),
+                ('text', f'2. Knit {self.increase-1} rounds of stockinette. Knit another round and M1R before the stitch marker. Knit one stitch after the stitch marker then M1L. Use stitch markers to mark your increase rounds if you wish to do so. {edge}'),
                 ('text', f'3. Repeat Step 2 {self.num_increases} times.'),
                 ('text', f'4. Cast off.'),
                 ('text', f'5. Repeat steps 1-3 for the right sleeve.'),
                 ]
         if self.sleeve == 'Balloon':
             self.pattern += [
-                ('text', f'2. Knit stockinette until your sleeves measure {self.sleeve_length}. Knit two more rounds and K2Tog every {round(self.sleeve_opening_width*2/self.num_decreases*2)} stitches. {cuff}'),
+                ('text', f'2. Knit stockinette until your sleeves measure {self.sleeve_length}. Knit two more rounds and K2Tog every {round(self.sleeve_opening_width*2/self.num_decreases*2)} stitches. {edge}'),
                 ('text', f'3. Cast off.'),
                 ('text', f'4. Repeat steps 1-3 for the right sleeve.')
                 ]
