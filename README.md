@@ -1,6 +1,6 @@
 # Sweater Customization Dashboard
  
-Welcome to the repository for the sweater customization dashboard. This project creates a knitting pattern for a drop shoulder sweater with the user's inputted customizations. Prior knitting knowledge is needed to understand the pattern and dashboard details. This pattern will not teach you how to knit, but will instead give you instructions to follow. A more detailed understanding of the project is in a pdf called writeup.pdf is the writeup folder.
+Welcome to the repository for the sweater customization dashboard. This project creates a knitting pattern for a drop shoulder sweater with the user's inputted customizations. Prior knitting knowledge is needed to understand the pattern and dashboard details. This pattern will not teach you how to knit but will instead give you instructions to follow. A more detailed understanding of the project is in a pdf called writeup.pdf is the writeup folder.
 
 ### Launching the Dashboard
 To launch the dashboard, clone the repository and ensure that the following libraries are installed in your environment:
