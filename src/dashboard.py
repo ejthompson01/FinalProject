@@ -10,9 +10,9 @@ def run_app() -> None:
     app = Dash(__name__)
     app.title = 'Sweater Dashboard'
 
-    @app.server.route("/downloads/<filename>")
+    @app.server.route("/patterns/<filename>")
     def serve_pdf(filename):
-        return send_from_directory("downloads", filename, as_attachment=True)
+        return send_from_directory("patterns", filename, as_attachment=True)
     
     create_layout(app)
     app.run(debug=True, port=8051)
@@ -427,7 +427,7 @@ def generate_pattern(n_clicks, name,
                             body_height, bottom_width, neck_opening_width, sleeve_opening_width,
                             length, stitch, height, row)
         filename = pattern.generate_pdf()
-        href = f"/downloads/{filename}"
+        href = f"/patterns/{filename}"
         return href, {'display': 'inline',
                       'fontFamily': 'American Typewriter'}
     except Exception as e:

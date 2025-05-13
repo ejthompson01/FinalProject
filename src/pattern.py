@@ -159,9 +159,9 @@ class SweaterPattern:
     def generate_pdf(self):
         self.layout()
 
-        Path("downloads").mkdir(exist_ok=True)
+        Path("patterns")
         safe_name = re.sub(r'[^\w\s-]', '', self.name).strip().replace(' ', '_')
-        filename = f"downloads/{safe_name}_pattern.pdf"
+        filename = f"patterns/{safe_name}_pattern.pdf"
 
         pdf = FPDF()
         pdf.add_page()
