@@ -6,7 +6,7 @@ class SweaterPattern:
     def __init__(self, name, neck, sleeve, embellishment,
                     rib1, rib2, edge, collar, size,
                     sleeve_length, sleeve_cuff_width, shoulder_width,
-                    body_height, bottom_width, neck_opening_width,
+                    body_height, bottom_width, neck_opening_width, sleeve_opening_width,
                     length, stitch, height, row):
         self.sleeve = sleeve
         self.neck = neck
@@ -22,6 +22,7 @@ class SweaterPattern:
         self.body_height = body_height
         self.bottom_width = bottom_width
         self.neck_opening_width = neck_opening_width
+        self.sleeve_opening_width = sleeve_opening_width
         self.name = name
         self.rib1 = rib1
         self.rib2 = rib2
@@ -29,10 +30,11 @@ class SweaterPattern:
         self.collar = collar
         self.pattern = ''
 
-        self.stitch_gauge = round(stitch/length)
-        self.row_gauge = round(row/height)
+        self.stitch_gauge = round(self.stitch/self.length)
+        self.row_gauge = round(self.row/self.height)
 
         size_chart = {
+            
             "Small": {'sleeve_length': 19, 'sleeve_cuff_width': 3.5, 'shoulder_width': 23, "body_height": 24.5,
                       "bottom_width": 21, "neck_opening_width": 14, "sleeve_opening_width": 7.5, "mock_height": 2, 'turtle_height': 6},
             "Medium": {"sleeve_length": 19.5, "sleeve_cuff_width": 3.75, "shoulder_width": 23, "body_height": 25.5,
@@ -57,7 +59,7 @@ class SweaterPattern:
         if self.size == 'Insert own measurements':
             self.size == 'custom'
         
-        if self.sleeve == 'Tapered' or 'Balloon':
+        if self.sleeve in ['Tapered', 'Balloon']:
             self.num_decreases = round(((self.sleeve_opening_width*2) - (self.sleeve_cuff_width*2))*self.stitch_gauge/2)
             num_rounds = self.sleeve_length * self.row_gauge
             self.decrease = round(num_rounds/self.num_decreases)
@@ -84,7 +86,7 @@ class SweaterPattern:
         # Pattern
         self.pattern = [
             # Intro
-            ('h1', f'{self.name} Sweater Pattern'),
+            ('h1', f'{self.name} Pattern'),
             ('text', f'This is the pattern for your {self.size.lower()}, {self.sleeve.lower()}, {self.neck.lower()}, drop shoulder sweater. This pattern is written using knitting jargon so please look up any terms you are unfamiliar with. Please keep in mind that yarn types may alter some measurements. Consistently test your work against your desired measurements throughout your project to ensure accuracy. Make adjustments if needed. Enjoy!'),
             ('text', ''),
             ('h2', f'Materials Needed'),
@@ -159,7 +161,7 @@ class SweaterPattern:
 
         Path("downloads").mkdir(exist_ok=True)
         safe_name = re.sub(r'[^\w\s-]', '', self.name).strip().replace(' ', '_')
-        filename = f"downloads/{safe_name}_sweater_pattern.pdf"
+        filename = f"downloads/{safe_name}_pattern.pdf"
 
         pdf = FPDF()
         pdf.add_page()

@@ -28,3 +28,5 @@ The sweater name can be any string the user wishes to enter. The image displayin
 To accurately calculate the pattern details, users must enter their gauge. The gauge is found by knitting a small square with the needle size, yarn, and tension they intend to use for the pattern. Then, measure the length of the square, count the number of stitches in that length, measure the height, and count the number of rows in that height. If this step is not completed and users guess at their gauge, the pattern calculations will not be correct.
 
 When all customizations are selected and entered, hit "Generate Pattern." A link to trigger the download will appear to the right of the button. If you have forgotten to select or enter one of the required inputs, the link will not appear. Your download can be found in the downloads folder.
+
+You will find your sweater pattern in the downloads folder called (the name the entered)_sweater_pattern.pdf.

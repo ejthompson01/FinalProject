@@ -25,7 +25,7 @@ def create_layout(app: Dash) -> None:
                             'fontFamily': 'American Typewriter',
                             'background-color': '#ffa6c3'}
                     )
-    name_label = html.H4("Enter the name of your sweater (ex. My Sweater, The Kate, Alex's Sweater):",
+    name_label = html.H4("Enter the name of your sweater (e.g. My Sweater, The Kate, Alex's Sweater):",
                            style={'fontFamily': 'American Typewriter'}
                             )
     
@@ -185,9 +185,14 @@ def create_layout(app: Dash) -> None:
                             placeholder='Insert neck opening width',
                             style={'fontFamily': 'American Typewriter'}
                             )
+    size_input7 = dcc.Input(id='size-input7',
+                            type='number',
+                            placeholder='Insert armhole opening width',
+                            style={'fontFamily': 'American Typewriter'}
+                            )
     children += [size_heading, size_label, size_options, sizing_label,
                  size_input1, size_input2, size_input3,
-                 size_input4, size_input5, size_input6]
+                 size_input4, size_input5, size_input6, size_input7]
     
     # COLUMN 2
     # Image of the sweater
@@ -282,7 +287,6 @@ def create_layout(app: Dash) -> None:
             html.Div(children=children1, style={'flex': '1', 'padding': '10px', 'width': '100%'})
             ], style={'display': 'flex'})
         ])
-       
     return
 
 @callback(
@@ -369,6 +373,7 @@ def update_collar(neck: str, embellish: str):
     Output('size-input4', 'style'),
     Output('size-input5', 'style'),
     Output('size-input6', 'style'),
+    Output('size-input7', 'style'),
     Input('size-dd', 'value')
 )
 def update_size_input(size: str):
@@ -378,7 +383,7 @@ def update_size_input(size: str):
                  }
     else:
         style = {'display': 'none'}
-    return style, style, style, style, style, style, style
+    return style, style, style, style, style, style, style, style
     
 
 @callback(
@@ -400,6 +405,7 @@ def update_size_input(size: str):
     Input('size-input4', 'value'),
     Input('size-input5', 'value'),
     Input('size-input6', 'value'),
+    Input('size-input7', 'value'),
     Input('length-input', 'value'),
     Input('stitch-input', 'value'),
     Input('height-input', 'value'),
@@ -409,7 +415,7 @@ def generate_pattern(n_clicks, name,
                     neck, sleeve, embellishment,
                     rib1, rib2, edge, collar, size,
                     sleeve_length, sleeve_cuff_width, shoulder_width,
-                    body_height, bottom_width, neck_opening_width,
+                    body_height, bottom_width, neck_opening_width, sleeve_opening_width,
                     length, stitch, height, row):
     if n_clicks == 0:
         return '', {'display': 'none'}
@@ -418,7 +424,7 @@ def generate_pattern(n_clicks, name,
         pattern = SweaterPattern(name, neck, sleeve, embellishment,
                             rib1, rib2, edge, collar, size,
                             sleeve_length, sleeve_cuff_width, shoulder_width,
-                            body_height, bottom_width, neck_opening_width,
+                            body_height, bottom_width, neck_opening_width, sleeve_opening_width,
                             length, stitch, height, row)
         filename = pattern.generate_pdf()
         href = f"/downloads/{filename}"
