@@ -57,7 +57,7 @@ class SweaterPattern:
             if self.neck == 'Turtleneck':
                 self.collar = size_chart[self.size]['turtle_height']
         if self.size == 'Insert own measurements':
-            self.size == 'custom'
+            self.size = 'custom'
         
         if self.sleeve in ['Tapered', 'Balloon']:
             self.num_decreases = round(((self.sleeve_opening_width*2) - (self.sleeve_cuff_width*2))*self.stitch_gauge/2)
